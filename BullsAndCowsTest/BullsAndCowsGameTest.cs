@@ -95,6 +95,7 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal("1A1B", answer);
         }
+
         /*
         [Fact]
         public void Should_return_string_with_4_diffrent_digital()
