@@ -58,6 +58,22 @@ namespace BullsAndCowsTest
             Assert.Equal("0A4B", answer);
         }
 
+        [Theory]
+        [InlineData("1 3 2 5", "1234")]
+        [InlineData("2 1 3 5", "1234")]
+        [InlineData("2 3 9 4", "1234")]
+        public void Should_return_1A2B_for_certain_partially_right_cases(string guess, string secret)
+        {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(m => m.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+            //when
+            string answer = game.Guess(guess);
+            //then
+            Assert.Equal("1A2B", answer);
+        }
+
         public class TestSecretGenerator : SecretGenerator
         {
             public override string GenerateSecret()
