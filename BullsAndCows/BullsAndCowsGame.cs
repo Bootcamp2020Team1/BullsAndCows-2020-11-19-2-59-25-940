@@ -24,14 +24,32 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
+            var matches = secret.Select((value, index) => new { Index = index, Value = value })
+                    .Where(x => x.Value == guess[x.Index])
+                    .Select(x => x.Value);
             if (secret == guess)
             {
                 return "4A0B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4 && matches.ToList().Count == 0)
             {
                 return "0A4B";
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4 && matches.ToList().Count == 1)
+            {
+                return "1A3B";
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2 && matches.ToList().Count == 0)
+            {
+                return "0A2B";
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2 && matches.ToList().Count == 1)
+            {
+                return "1A1B";
             }
 
             return "0A0B";

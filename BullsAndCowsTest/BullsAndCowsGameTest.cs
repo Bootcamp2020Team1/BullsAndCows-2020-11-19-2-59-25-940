@@ -1,5 +1,6 @@
 using BullsAndCows;
 using Moq;
+using System;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -94,7 +95,20 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal("1A1B", answer);
         }
-
+        /*
+        [Fact]
+        public void Should_return_string_with_4_diffrent_digital()
+        {
+            var secretGenerator = new SecretGenerator();
+            //Console.WriteLine(secretGenerator.GenerateSecret());
+            //var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            //when
+           // string answer = game.Guess(guess);
+            //then
+            Assert.Equal("1A1B", secretGenerator.GenerateSecret());
+        }
+        */
         public class TestSecretGenerator : SecretGenerator
         {
             public override string GenerateSecret()
