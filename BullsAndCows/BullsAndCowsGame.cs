@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -26,6 +27,11 @@ namespace BullsAndCows
             if (secret == guessWithoutSpace)
             {
                 return "4A0B";
+            }
+
+            if (secret.Where(secret => guessWithoutSpace.Contains(secret)).Count() == 4)
+            {
+                return "0A4B";
             }
 
             return "0A0B";
