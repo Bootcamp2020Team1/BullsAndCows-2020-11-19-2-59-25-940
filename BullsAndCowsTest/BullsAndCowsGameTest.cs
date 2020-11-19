@@ -58,12 +58,12 @@ namespace BullsAndCowsTest
             Assert.Equal("0A4B", answer);
         }
 
-        //public class TestSecretGenerator : SecretGenerator
-        //{
-        //    public override string GenerateSecret()
-        //    {
-        //        return "1234";
-        //    }
-        //}
+        public class TestSecretGenerator : SecretGenerator
+        {
+            public override string GenerateSecret()
+            {
+                return "1234";
+            }
+        }
     }
 }
