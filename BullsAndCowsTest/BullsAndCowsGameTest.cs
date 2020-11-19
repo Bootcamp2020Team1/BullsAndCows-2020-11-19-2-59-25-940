@@ -74,6 +74,22 @@ namespace BullsAndCowsTest
             Assert.Equal("1A2B", answer);
         }
 
+        [Theory]
+        [InlineData("1 ")]
+        [InlineData("1 3 5")]
+        [InlineData("2 2 9 4")]
+        public void Should_return_error_message_for_invalid_guess(string guess)
+        {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(m => m.GenerateSecret()).Returns("1234");
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+            //when
+            string answer = game.Guess(guess);
+            //then
+            Assert.Equal("Invalid input, please re-enter your guess.", answer);
+        }
+
         public class TestSecretGenerator : SecretGenerator
         {
             public override string GenerateSecret()

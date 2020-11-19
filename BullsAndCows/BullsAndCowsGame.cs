@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
@@ -17,8 +18,19 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            return Compare(this.secret, guessWithoutSpace);
+            string guessResult;
+            bool isValid = new Regex(@"^([0-9]\s){3}[0-9]$").IsMatch(guess) && guess.Replace(" ", string.Empty).Distinct().Count() == 4;
+            if (!isValid)
+            {
+                guessResult = "Invalid input, please re-enter your guess.";
+            }
+            else
+            {
+                var guessWithoutSpace = guess.Replace(" ", string.Empty);
+                guessResult = Compare(this.secret, guessWithoutSpace);
+            }
+
+            return guessResult;
         }
 
         private string Compare(string secret, string guess)
