@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BullsAndCows
@@ -18,7 +19,7 @@ namespace BullsAndCows
         public string Guess(string guess)
         {
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            return this.Compare(this.secret, guess);
+            return this.Compare(this.secret, guessWithoutSpace);
         }
 
         private string Compare(string secret, string guess)
@@ -26,6 +27,11 @@ namespace BullsAndCows
             if (secret == guess)
             {
                 return "4A0B";
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
+            {
+                return "0A4B";
             }
 
             return "0A0B";
