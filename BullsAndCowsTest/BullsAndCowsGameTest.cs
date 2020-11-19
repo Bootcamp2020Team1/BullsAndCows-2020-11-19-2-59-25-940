@@ -48,15 +48,17 @@ namespace BullsAndCowsTest
             Assert.Equal("4A0B", answer);
         }
 
-        [Fact]
-        public void Should_Return_0A4B_Given_4321_With_SecretNumber_1234()
+        [Theory]
+        [InlineData("4 3 2 1")]
+        [InlineData("4 2 3 1")]
+        public void Should_Return_0A4B_Given_4321_With_SecretNumber_1234(string guess)
         {
             //given
             var secretGenerator = new FakeGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
 
             //when
-            string answer = game.Answer("4 3 2 1");
+            string answer = game.Answer(guess);
             //then
             Assert.Equal("0A4B", answer);
         }
