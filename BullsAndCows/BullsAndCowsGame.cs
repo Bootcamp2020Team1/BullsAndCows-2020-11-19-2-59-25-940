@@ -27,27 +27,29 @@ namespace BullsAndCows
             var matches = secret.Select((value, index) => new { Index = index, Value = value })
                     .Where(x => x.Value == guess[x.Index])
                     .Select(x => x.Value);
+            var sameNumber = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count;
+            var sameNumberPosition = matches.ToList().Count;
             if (secret == guess)
             {
                 return "4A0B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4 && matches.ToList().Count == 0)
+            if (sameNumber == 4 && sameNumberPosition == 0)
             {
                 return "0A4B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4 && matches.ToList().Count == 1)
+            if (sameNumber == 4 && sameNumberPosition == 1)
             {
                 return "1A3B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2 && matches.ToList().Count == 0)
+            if (sameNumber == 2 && sameNumberPosition == 0)
             {
                 return "0A2B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2 && matches.ToList().Count == 1)
+            if (sameNumber == 2 && sameNumberPosition == 1)
             {
                 return "1A1B";
             }
