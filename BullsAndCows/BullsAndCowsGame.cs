@@ -33,9 +33,9 @@ namespace BullsAndCows
             }
             else
             {
+                chancesLeft--;
                 var guessWithoutSpace = guess.Replace(" ", string.Empty);
                 guessResult = Compare(this.secret, guessWithoutSpace);
-                chancesLeft--;
             }
 
             return guessResult;
@@ -54,13 +54,13 @@ namespace BullsAndCows
             }
             else
             {
-                if (chancesLeft == 1)
+                if (chancesLeft == 0)
                 {
                     answer += $" You lost. Secret is {secret}";
                 }
                 else
                 {
-                    answer += $" {chancesLeft - 1} chances left!";
+                    answer += $" {chancesLeft} chances left!";
                 }
             }
 

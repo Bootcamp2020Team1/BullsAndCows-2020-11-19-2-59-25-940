@@ -40,7 +40,7 @@ namespace BullsAndCowsTest
             //when
             string answer = game.Guess("5 6 7 8");
             //then
-            Assert.Equal("0A0B", answer);
+            Assert.Equal("0A0B", answer.Split(" ")[0]);
         }
 
         [Theory]
@@ -55,7 +55,7 @@ namespace BullsAndCowsTest
             //when
             string answer = game.Guess(guess);
             //then
-            Assert.Equal("4A0B", answer);
+            Assert.Equal("4A0B", answer.Split(" ")[0]);
             Assert.False(game.CanContinue);
         }
 
@@ -72,7 +72,7 @@ namespace BullsAndCowsTest
             //when
             string answer = game.Guess(guess);
             //then
-            Assert.Equal("0A4B", answer);
+            Assert.Equal("0A4B", answer.Split(" ")[0]);
         }
 
         [Theory]
@@ -88,7 +88,7 @@ namespace BullsAndCowsTest
             //when
             string answer = game.Guess(guess);
             //then
-            Assert.Equal("1A2B", answer);
+            Assert.Equal("1A2B", answer.Split(" ")[0]);
         }
 
         [Theory]
