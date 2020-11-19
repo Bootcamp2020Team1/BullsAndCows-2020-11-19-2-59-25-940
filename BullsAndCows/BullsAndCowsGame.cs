@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
+        private const int AllowableGuessLength = 4;
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
 
@@ -30,6 +32,18 @@ namespace BullsAndCows
             var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
 
             return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
+        }
+
+        public bool IsValidGuess(string guess)
+        {
+            var regex = new Regex(@"^([0-9]\s){3}[0-9]$");
+            if (regex.Match(guess).Success)
+            {
+                var guessArrayWithSpaceRemoved = guess.Split(" ");
+                return guessArrayWithSpaceRemoved.Length == AllowableGuessLength && guessArrayWithSpaceRemoved.Distinct<string>().Count() == AllowableGuessLength;
+            }
+
+            return false;
         }
     }
 }

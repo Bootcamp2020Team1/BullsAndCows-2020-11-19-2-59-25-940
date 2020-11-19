@@ -101,5 +101,19 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal("1A2B", answer);
         }
+
+        [Fact]
+        public void Should_Return_True_If_Format_Is_Correct()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            //when
+            var actual = game.IsValidGuess("0 1 2 3");
+
+            //then
+            Assert.True(actual);
+        }
     }
 }
