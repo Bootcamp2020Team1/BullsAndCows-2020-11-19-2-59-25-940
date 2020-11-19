@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BullsAndCows
@@ -24,17 +25,11 @@ namespace BullsAndCows
         public string Compare(string secret, string guess)
         {
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            if (secret == guessWithoutSpace)
-            {
-                return "4A0B";
-            }
+            var xList = secret.Where((secret, index) => guessWithoutSpace[index] == secret).ToList();
+            var yList = secret.Where(secret => guessWithoutSpace.Contains(secret)).ToList();
+            var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
 
-            if (secret.Where(secret => guessWithoutSpace.Contains(secret)).Count() == 4)
-            {
-                return "0A4B";
-            }
-
-            return "0A0B";
+            return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
         }
     }
 }

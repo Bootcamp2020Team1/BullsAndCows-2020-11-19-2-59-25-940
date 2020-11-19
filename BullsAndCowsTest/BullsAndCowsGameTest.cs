@@ -67,5 +67,22 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal("0A4B", answer);
         }
+
+        [Theory]
+        [InlineData("1 2 4 3", "1234")]
+        [InlineData("5 6 8 7", "5678")]
+        public void Should_Return_2A2B_Given_4CorrectNumberAnd2CorrectOrder(string guess, string secret)
+        {
+            //given
+            var secretGenerator = new Mock<SecretGenerator>();
+            secretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(secretGenerator.Object);
+
+            //when
+            string answer = game.Guess(guess);
+
+            //then
+            Assert.Equal("2A2B", answer);
+        }
     }
 }
