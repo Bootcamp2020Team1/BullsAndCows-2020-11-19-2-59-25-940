@@ -7,17 +7,19 @@ namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
-        private const int AllowableGuessLength = 4;
+        private readonly int allowableGuessLength = 4;
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
+        private int chanceLeft = 6;
 
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.secret = secretGenerator.GenerateSecret();
+            CanContinue = true;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue { get; private set; }
 
         public string Guess(string guess)
         {
@@ -40,7 +42,7 @@ namespace BullsAndCows
             if (regex.Match(guess).Success)
             {
                 var guessArrayWithSpaceRemoved = guess.Split(" ");
-                return guessArrayWithSpaceRemoved.Length == AllowableGuessLength && guessArrayWithSpaceRemoved.Distinct<string>().Count() == AllowableGuessLength;
+                return guessArrayWithSpaceRemoved.Length == allowableGuessLength && guessArrayWithSpaceRemoved.Distinct<string>().Count() == allowableGuessLength;
             }
 
             return false;

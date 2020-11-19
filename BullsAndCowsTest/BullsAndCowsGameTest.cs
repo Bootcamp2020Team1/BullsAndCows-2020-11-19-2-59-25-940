@@ -115,5 +115,23 @@ namespace BullsAndCowsTest
             //then
             Assert.True(actual);
         }
+
+        [Theory]
+        [InlineData("1234")]
+        [InlineData("1    234")]
+        [InlineData("12345")]
+        [InlineData("ss13")]
+        public void Should_Return_False_If_Guess_Is_In_Wrong_Format(string guess)
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            //when
+            var actual = game.IsValidGuess(guess);
+
+            //then
+            Assert.False(actual);
+        }
     }
 }
