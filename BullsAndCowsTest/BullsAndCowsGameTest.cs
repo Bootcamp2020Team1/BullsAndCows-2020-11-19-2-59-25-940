@@ -38,14 +38,17 @@ namespace BullsAndCowsTest
             Assert.Equal("4A0B", answer);
         }
 
-        [Fact]
-        public void Should_return_0A4B_when_all_digits_are_right()
+        [Theory]
+        [InlineData("4 3 2 1")]
+        [InlineData("4 3 1 2")]
+        [InlineData("2 3 4 1")]
+        public void Should_return_0A4B_when_all_digits_are_right(string guess)
         {
             //given
             var secretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             //when
-            string answer = game.Guess("2 3 4 1");
+            string answer = game.Guess(guess);
             //then
             Assert.Equal("0A4B", answer);
         }
