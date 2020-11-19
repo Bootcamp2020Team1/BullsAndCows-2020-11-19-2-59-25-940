@@ -12,7 +12,10 @@ namespace BullsAndCows
             {
                 var previous = new Random().Next(0, 9);
                 var random = new Random().Next(0, previous);
-                secret += random;
+                if (!secret.Contains(random.ToString()))
+                {
+                    secret += random;
+                }
             }
 
             return secret;
