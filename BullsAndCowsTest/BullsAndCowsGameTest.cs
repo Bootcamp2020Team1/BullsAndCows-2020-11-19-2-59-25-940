@@ -22,12 +22,12 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
             for (int i = 0; i < 5; i++)
             {
-                game.Guess("1 2 3 4");
+                game.Guess("5 2 3 4");
             }
 
             Assert.True(game.CanContinue);
 
-            game.Guess("1 2 3 4");
+            game.Guess("5 2 3 4");
             Assert.False(game.CanContinue);
         }
 
