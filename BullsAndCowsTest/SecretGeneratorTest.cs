@@ -16,7 +16,7 @@ namespace BullsAndCowsTest
             var secret = secretGenerator.GenerateSecret();
 
             //then
-            Regex expected = new Regex("^[0-9]+$");
+            Regex expected = new Regex("^[0-9]{4}$");
             Assert.Matches(expected, secret);
         }
     }
