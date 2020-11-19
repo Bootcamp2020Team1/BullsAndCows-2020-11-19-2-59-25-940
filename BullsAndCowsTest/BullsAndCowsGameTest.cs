@@ -80,6 +80,20 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal("1A2B", answer);
         }
+
+        [Fact]
+        public void Should_Return_Error_Message_When_Invalid_Input()
+        {
+            //given
+            var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            //when
+            string answer = game.Guess("5 6 7 7");
+
+            //then
+            Assert.Equal("Wrong Input, input again", answer);
+        }
     }
 
     public class TestSecretGenerator : SecretGenerator

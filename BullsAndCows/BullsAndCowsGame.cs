@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
+﻿using System.Linq;
 
 namespace BullsAndCows
 {
@@ -19,6 +17,14 @@ namespace BullsAndCows
         public string Guess(string guess)
         {
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
+            for (int i = 0; i < 4; i++)
+            {
+                if (guessWithoutSpace.Where(guessChar => guessChar == guessWithoutSpace[i]).ToList().Count > 1)
+                {
+                    return "Wrong Input, input again";
+                }
+            }
+
             return this.Compare(this.secret, guessWithoutSpace);
         }
 
@@ -27,17 +33,6 @@ namespace BullsAndCows
             int x = secret.Where(secretChar => (guess.IndexOf(secretChar) == secret.IndexOf(secretChar))).ToList().Count;
             int y = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - x;
             return $"{x}A{y}B";
-            if (secret == guess)
-            {
-                return "4A0B";
-            }
-
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
-            {
-                return "0A4B";
-            }
-
-            return "0A0B";
         }
     }
 }
