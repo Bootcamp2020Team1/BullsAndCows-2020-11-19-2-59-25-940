@@ -7,19 +7,25 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
-        //private int gameCounter = 0;
+        private int gameCounter = 1;
 
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
+            this.CanContinue = true;
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
             Console.WriteLine(this.secret);
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue { get; set; }
 
         public string Guess(string guess)
         {
+            if (gameCounter >= 6)
+            {
+                CanContinue = false;
+            }
+
             while (!IsGuessVlid(guess))
             {
                 Console.WriteLine("input is not valid, please input 4 different digital, use space to separate each other");
@@ -44,6 +50,7 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
+            gameCounter += 1;
             var matches = secret.Select((value, index) => new { Index = index, Value = value })
                     .Where(x => x.Value == guess[x.Index])
                     .Select(x => x.Value);
