@@ -142,13 +142,30 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
 
             //when
-            for (var i = 0; i <= 6; i++)
+            for (var i = 0; i <= 5; i++)
             {
                 game.Guess("1 2 3 4");
             }
 
             //then
             Assert.False(game.CanContinue);
+        }
+
+        [Fact]
+        public void Should_Continue_Before_Six_Guess()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            //when
+            for (var i = 0; i <= 4; i++)
+            {
+                game.Guess("1 2 3 4");
+            }
+
+            //then
+            Assert.True(game.CanContinue);
         }
     }
 }
