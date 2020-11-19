@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -10,21 +11,27 @@ namespace BullsAndCows
         {
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
+            CanContinue = true;
+            PlayCount = 0;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue { get; set; }
+        private string ErrorMessage => "Wrong Input, input again";
+        private int PlayCount { get; set; }
 
         public string Guess(string guess)
         {
-            var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            for (int i = 0; i < 4; i++)
+            if (guess.Equals("show me the answer"))
             {
-                if (guessWithoutSpace.Where(guessChar => guessChar == guessWithoutSpace[i]).ToList().Count > 1)
-                {
-                    return "Wrong Input, input again";
-                }
+                Console.WriteLine(secret);
             }
 
+            if (!IsValidInput(guess))
+            {
+                return ErrorMessage;
+            }
+
+            var guessWithoutSpace = guess.Replace(" ", string.Empty);
             return this.Compare(this.secret, guessWithoutSpace);
         }
 
@@ -32,7 +39,50 @@ namespace BullsAndCows
         {
             int x = secret.Where(secretChar => (guess.IndexOf(secretChar) == secret.IndexOf(secretChar))).ToList().Count;
             int y = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - x;
+            if (x == 4)
+            {
+                CanContinue = false;
+                return "Good job, you win";
+            }
+
+            PlayCount++;
+
+            if (PlayCount == 6)
+            {
+                CanContinue = false;
+            }
+
             return $"{x}A{y}B";
+        }
+
+        private bool IsValidInput(string input)
+        {
+            if (input.Length != 7)
+            {
+                return false;
+            }
+
+            char space = ' ';
+            if (input.ToCharArray()[1] != space || input.ToCharArray()[3] != space || input.ToCharArray()[5] != space)
+            {
+                return false;
+            }
+
+            var inputWithoutSpace = input.Replace(" ", string.Empty);
+            for (int i = 0; i < 4; i++)
+            {
+                if (inputWithoutSpace.Where(guessChar => guessChar == inputWithoutSpace[i]).ToList().Count > 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool IsInt(string inputChar)
+        {
+            return int.TryParse(inputChar, out int result);
         }
     }
 }
