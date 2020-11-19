@@ -14,7 +14,7 @@ namespace BullsAndCows
             string secret = string.Empty;
             for (var i = 0; i < 4; i++)
             {
-                int index = random.Next(0, digitList.Count + 1);
+                int index = random.Next(0, digitList.Count);
                 secret += digitList[index].ToString();
                 digitList.RemoveAt(index);
             }
