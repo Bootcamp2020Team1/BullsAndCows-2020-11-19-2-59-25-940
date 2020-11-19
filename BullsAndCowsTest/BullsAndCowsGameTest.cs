@@ -28,7 +28,6 @@ namespace BullsAndCowsTest
             Assert.Equal("0A0B", answer);
         }
 
-        //[Fact]
         [Theory]
         [InlineData("5 6 7 8", "5678")]
         [InlineData("1 2 3 4", "1234")]
