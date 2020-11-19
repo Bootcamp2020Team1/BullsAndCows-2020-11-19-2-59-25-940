@@ -22,9 +22,33 @@ namespace BullsAndCowsTest
             var secretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             //when
-            string answer = game.Guess("1234");
+            string answer = game.Guess("1 2 3 4");
             //then
             Assert.Equal("0A0B", answer);
+        }
+
+        [Fact]
+        public void Should_return_0A0B_when_all_digital_right_and__no_positions()
+        {
+            //var secretGenerator = new SecretGenerator();
+            var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            //when
+            string answer = game.Guess("5 6 7 8");
+            //then
+            Assert.Equal("4A0B", answer);
+        }
+
+        [Fact]
+        public void Should_return_0A0B_when_no_digital_right_and__all_positions_wrong()
+        {
+            //var secretGenerator = new SecretGenerator();
+            var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            //when
+            string answer = game.Guess("8 7 6 5");
+            //then
+            Assert.Equal("0A4B", answer);
         }
 
         public class TestSecretGenerator : SecretGenerator
