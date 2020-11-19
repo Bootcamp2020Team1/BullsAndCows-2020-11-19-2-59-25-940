@@ -7,7 +7,7 @@ namespace BullsAndCowsTest
     {
         public override string GenerateSecret()
         {
-            return "1 2 3 4";
+            return "1234";
         }
     }
 

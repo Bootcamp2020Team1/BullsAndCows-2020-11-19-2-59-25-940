@@ -22,7 +22,8 @@ namespace BullsAndCows
 
         public string Compare(string secret, string guess)
         {
-            if (secret == guess)
+            var guessWithoutSpace = guess.Replace(" ", string.Empty);
+            if (secret == guessWithoutSpace)
             {
                 return "4A0B";
             }
