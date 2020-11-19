@@ -78,6 +78,9 @@ namespace BullsAndCowsTest
         [InlineData("1 ")]
         [InlineData("1 3 5")]
         [InlineData("2 2 9 4")]
+        [InlineData("2 c 9 4")]
+        [InlineData("asdf")]
+        [InlineData("2194")]
         public void Should_return_error_message_for_invalid_guess(string guess)
         {
             //given
@@ -87,7 +90,7 @@ namespace BullsAndCowsTest
             //when
             string answer = game.Guess(guess);
             //then
-            Assert.Equal("Invalid input, please re-enter your guess.", answer);
+            Assert.Equal("Wrong Input, input again", answer);
         }
 
         public class TestSecretGenerator : SecretGenerator

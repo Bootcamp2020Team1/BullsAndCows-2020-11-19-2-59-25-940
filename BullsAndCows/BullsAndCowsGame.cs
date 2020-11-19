@@ -22,7 +22,7 @@ namespace BullsAndCows
             bool isValid = new Regex(@"^([0-9]\s){3}[0-9]$").IsMatch(guess) && guess.Replace(" ", string.Empty).Distinct().Count() == 4;
             if (!isValid)
             {
-                guessResult = "Invalid input, please re-enter your guess.";
+                guessResult = "Wrong Input, input again";
             }
             else
             {
