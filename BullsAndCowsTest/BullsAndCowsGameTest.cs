@@ -56,6 +56,7 @@ namespace BullsAndCowsTest
             string answer = game.Guess(guess);
             //then
             Assert.Equal("4A0B", answer);
+            Assert.False(game.CanContinue);
         }
 
         [Theory]

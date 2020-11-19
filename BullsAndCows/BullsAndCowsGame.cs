@@ -45,6 +45,10 @@ namespace BullsAndCows
         {
             var bulls = secret.Where(secretChar => guess[secret.IndexOf(secretChar)] == secretChar).ToList().Count;
             var cows = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - bulls;
+            if (bulls == 4)
+            {
+                chancesLeft = 0;
+            }
 
             return $"{bulls}A{cows}B";
         }
