@@ -6,6 +6,7 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
+
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -21,6 +22,11 @@ namespace BullsAndCows
 
         public string Compare(string secret, string guess)
         {
+            if (secret == guess)
+            {
+                return "4A0B";
+            }
+
             return "0A0B";
         }
     }
