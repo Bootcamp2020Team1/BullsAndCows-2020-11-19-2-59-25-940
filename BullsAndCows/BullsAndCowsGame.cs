@@ -24,6 +24,9 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
+            int x = secret.Where(secretChar => (guess.IndexOf(secretChar) == secret.IndexOf(secretChar))).ToList().Count;
+            int y = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - x;
+            return $"{x}A{y}B";
             if (secret == guess)
             {
                 return "4A0B";
