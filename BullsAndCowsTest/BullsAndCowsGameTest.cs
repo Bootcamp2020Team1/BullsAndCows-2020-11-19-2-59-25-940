@@ -27,8 +27,11 @@ namespace BullsAndCowsTest
             Assert.Equal("0A0B", answer);
         }
 
-        [Fact]
-        public void Should_return_0A0B_when_all_digital_right_and__no_positions()
+        //[Fact]
+        [Theory]
+        [InlineData("4 3 2 1")]
+        [InlineData("4 3 1 2")]
+        public void Should_return_0A0B_when_all_digital_right_and__no_positions(string guess)
         {
             //var secretGenerator = new SecretGenerator();
             var secretGenerator = new TestSecretGenerator();
