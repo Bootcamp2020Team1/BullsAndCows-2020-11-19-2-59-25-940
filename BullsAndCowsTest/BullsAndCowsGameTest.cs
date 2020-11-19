@@ -133,5 +133,22 @@ namespace BullsAndCowsTest
             //then
             Assert.False(actual);
         }
+
+        [Fact]
+        public void Should_Not_Continue_After_Six_Guess()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            //when
+            for (var i = 0; i <= 6; i++)
+            {
+                game.Guess("1 2 3 4");
+            }
+
+            //then
+            Assert.False(game.CanContinue);
+        }
     }
 }

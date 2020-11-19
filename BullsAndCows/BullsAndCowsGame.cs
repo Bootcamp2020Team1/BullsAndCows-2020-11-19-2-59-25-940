@@ -20,20 +20,19 @@ namespace BullsAndCows
         }
 
         public bool CanContinue { get; private set; }
+        public string CorrectAnswer
+        {
+            get
+            {
+                return "4A0B";
+            }
+        }
 
         public string Guess(string guess)
         {
+            DeductOneChance();
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
             return this.Compare(this.secret, guessWithoutSpace);
-        }
-
-        public string Compare(string secret, string guess)
-        {
-            var xList = secret.Where((secret, index) => guess[index] == secret).ToList();
-            var yList = secret.Where(secret => guess.Contains(secret)).ToList();
-            var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
-
-            return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
         }
 
         public bool IsValidGuess(string guess)
@@ -46,6 +45,27 @@ namespace BullsAndCows
             }
 
             return false;
+        }
+
+        private void DeductOneChance()
+        {
+            if (chanceLeft == 1)
+            {
+                CanContinue = false;
+            }
+            else
+            {
+                chanceLeft -= 1;
+            }
+        }
+
+        private string Compare(string secret, string guess)
+        {
+            var xList = secret.Where((secret, index) => guess[index] == secret).ToList();
+            var yList = secret.Where(secret => guess.Contains(secret)).ToList();
+            var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
+
+            return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
         }
     }
 }
