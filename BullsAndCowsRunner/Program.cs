@@ -7,7 +7,6 @@ namespace BullsAndCowsRunner
     {
         public static void Main(string[] args)
         {
-            new GameRunner().Run();
         }
     }
 }
