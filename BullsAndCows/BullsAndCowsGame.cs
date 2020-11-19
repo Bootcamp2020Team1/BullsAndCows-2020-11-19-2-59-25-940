@@ -19,14 +19,14 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            return this.Compare(this.secret, guess);
+            var guessWithoutSpace = guess.Replace(" ", string.Empty);
+            return this.Compare(this.secret, guessWithoutSpace);
         }
 
         public string Compare(string secret, string guess)
         {
-            var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            var xList = secret.Where((secret, index) => guessWithoutSpace[index] == secret).ToList();
-            var yList = secret.Where(secret => guessWithoutSpace.Contains(secret)).ToList();
+            var xList = secret.Where((secret, index) => guess[index] == secret).ToList();
+            var yList = secret.Where(secret => guess.Contains(secret)).ToList();
             var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
 
             return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
