@@ -16,7 +16,7 @@ namespace BullsAndCows
 
         public bool CanContinue => true;
 
-        public string Answer(string guess)
+        public string Guess(string guess)
         {
             return this.Compare(this.secret, guess);
         }

@@ -31,7 +31,7 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator);
 
             //when
-            string answer = game.Answer("5 6 7 8");
+            string answer = game.Guess("5 6 7 8");
             //then
             Assert.Equal("0A0B", answer);
         }
@@ -39,7 +39,7 @@ namespace BullsAndCowsTest
         [Theory]
         [InlineData("1 2 3 4", "1234")]
         [InlineData("5 6 7 8", "5678")]
-        public void Should_Return_4A0B_Given_1234_With_SecretNumber_1234(string guess, string secret)
+        public void Should_Return_4A0B_Given_4CorrectNumberAnd4CorrectOrder(string guess, string secret)
         {
             //given
             var secretGenerator = new Mock<SecretGenerator>();
@@ -47,7 +47,7 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(secretGenerator.Object);
 
             //when
-            string answer = game.Answer(guess);
+            string answer = game.Guess(guess);
 
             //then
             Assert.Equal("4A0B", answer);
@@ -55,15 +55,15 @@ namespace BullsAndCowsTest
 
         [Theory]
         [InlineData("4 3 2 1", "1234")]
-        [InlineData("4 2 3 1", "1234")]
-        public void Should_Return_0A4B_Given_4321_With_SecretNumber_1234(string guess, string secret)
+        [InlineData("8 7 6 5", "5678")]
+        public void Should_Return_0A4B_Given_4CorrectNumberAnd0CorrectOrder(string guess, string secret)
         {
             //given
             var secretGenerator = new Mock<SecretGenerator>();
             secretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
             var game = new BullsAndCowsGame(secretGenerator.Object);
             //when
-            string answer = game.Answer(guess);
+            string answer = game.Guess(guess);
             //then
             Assert.Equal("0A4B", answer);
         }
