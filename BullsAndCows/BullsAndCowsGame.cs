@@ -43,14 +43,28 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
+            string answer = string.Empty;
             var bulls = secret.Where(secretChar => guess[secret.IndexOf(secretChar)] == secretChar).ToList().Count;
             var cows = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - bulls;
+            answer = $"{bulls}A{cows}B";
             if (bulls == 4)
             {
                 chancesLeft = 0;
+                answer += " Congrats, You Win!";
+            }
+            else
+            {
+                if (chancesLeft == 1)
+                {
+                    answer += $" You lost. Secret is {secret}";
+                }
+                else
+                {
+                    answer += $" {chancesLeft - 1} chances left!";
+                }
             }
 
-            return $"{bulls}A{cows}B";
+            return answer;
         }
     }
 }
