@@ -1,4 +1,6 @@
+using System.Runtime.InteropServices;
 using BullsAndCows;
+using Moq;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -28,28 +30,33 @@ namespace BullsAndCowsTest
             Assert.Equal("0A0B", answer);
         }
 
-        [Fact]
-        public void Should_Return_4A0B_When_All_Digit_And_Position_Right()
+        [Theory]
+        [InlineData("1 2 3 4", "1234")]
+        [InlineData("5 6 7 8", "5678")]
+        public void Should_Return_4A0B_When_All_Digit_And_Position_Right(string guess, string secret)
         {
             //given
-            var secretGenerator = new TestSecretGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
-            string answer = game.Guess("1 2 3 4");
+            string answer = game.Guess(guess);
 
             //then
             Assert.Equal("4A0B", answer);
         }
 
         [Theory]
-        [InlineData("4 3 2 1")]
-        [InlineData("4 3 1 2")]
-        public void Should_Return_0A4B_When_All_Digit_Right_And_Position_Wrong(string guess)
+        [InlineData("4 3 2 1", "1234")]
+        [InlineData("4 3 1 2", "1234")]
+        public void Should_Return_0A4B_When_All_Digit_Right_And_Position_Wrong(string guess, string secret)
         {
             //given
-            var secretGenerator = new TestSecretGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            //var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
             string answer = game.Guess(guess);
