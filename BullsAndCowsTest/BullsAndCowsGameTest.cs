@@ -16,6 +16,22 @@ namespace BullsAndCowsTest
         }
 
         [Fact]
+        public void Should_terminate_game_after_6_guesses()
+        {
+            var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+            for (int i = 0; i < 5; i++)
+            {
+                game.Guess("1 2 3 4");
+            }
+
+            Assert.True(game.CanContinue);
+
+            game.Guess("1 2 3 4");
+            Assert.False(game.CanContinue);
+        }
+
+        [Fact]
         public void Should_return_0A0B_when_all_wrong()
         {
             //given

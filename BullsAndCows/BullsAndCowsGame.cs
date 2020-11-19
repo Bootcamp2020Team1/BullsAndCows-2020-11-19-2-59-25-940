@@ -8,13 +8,20 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
+        private int chancesLeft = 6;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue
+        {
+            get
+            {
+                return chancesLeft > 0;
+            }
+        }
 
         public string Guess(string guess)
         {
@@ -28,6 +35,7 @@ namespace BullsAndCows
             {
                 var guessWithoutSpace = guess.Replace(" ", string.Empty);
                 guessResult = Compare(this.secret, guessWithoutSpace);
+                chancesLeft--;
             }
 
             return guessResult;
