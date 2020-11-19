@@ -13,7 +13,6 @@ namespace BullsAndCowsTest
         public void Should_Return_True_If_Format_Is_Correct()
         {
             //when
-            //new Regex(@"^([0-9]\s){3}[0-9]$")
             var actual = new InputValidator().IsValidGuess("0 1 2 3");
             //then
             Assert.True(actual);

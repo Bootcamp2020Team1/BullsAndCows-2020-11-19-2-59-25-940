@@ -1,4 +1,5 @@
 ﻿using BullsAndCows;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Xunit;
 
@@ -30,20 +31,7 @@ namespace BullsAndCowsTest
             var secret = secretGenerator.GenerateSecret();
 
             //then
-            Assert.True(HasUniqueChar(secret));
-        }
-
-        private bool HasUniqueChar(string secret)
-        {
-            foreach (var number in secret)
-            {
-                if (secret.LastIndexOf(number) != secret.IndexOf(number))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            Assert.Equal(4, secret.Distinct().Count());
         }
     }
 }
