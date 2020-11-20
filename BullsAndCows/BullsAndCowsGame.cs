@@ -32,7 +32,7 @@ namespace BullsAndCows
             }
 
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            return this.Compare(this.secret, guessWithoutSpace);
+            return Compare(secret, guessWithoutSpace);
         }
 
         private string Compare(string secret, string guess)
@@ -78,11 +78,6 @@ namespace BullsAndCows
             }
 
             return true;
-        }
-
-        private bool IsInt(string inputChar)
-        {
-            return int.TryParse(inputChar, out int result);
         }
     }
 }
