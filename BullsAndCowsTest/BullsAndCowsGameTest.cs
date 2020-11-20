@@ -38,9 +38,9 @@ namespace BullsAndCowsTest
             var secretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             //when
-            string answer = game.Guess("5 6 7 8");
+            string answerWithMessage = game.Guess("5 6 7 8");
             //then
-            Assert.Equal("0A0B", answer.Split(" ")[0]);
+            Assert.Equal("0A0B", answerWithMessage.Split(" ")[0]);
         }
 
         [Theory]
@@ -53,9 +53,9 @@ namespace BullsAndCowsTest
             mockSecretGenerator.Setup(m => m.GenerateSecret()).Returns(secret);
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
             //when
-            string answer = game.Guess(guess);
+            string answerWithMessage = game.Guess(guess);
             //then
-            Assert.Equal("4A0B", answer.Split(" ")[0]);
+            Assert.Equal("4A0B", answerWithMessage.Split(" ")[0]);
             Assert.False(game.CanContinue);
         }
 
@@ -70,9 +70,9 @@ namespace BullsAndCowsTest
             mockSecretGenerator.Setup(m => m.GenerateSecret()).Returns(secret);
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
             //when
-            string answer = game.Guess(guess);
+            string answerWithMessage = game.Guess(guess);
             //then
-            Assert.Equal("0A4B", answer.Split(" ")[0]);
+            Assert.Equal("0A4B", answerWithMessage.Split(" ")[0]);
         }
 
         [Theory]
@@ -86,9 +86,9 @@ namespace BullsAndCowsTest
             mockSecretGenerator.Setup(m => m.GenerateSecret()).Returns(secret);
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
             //when
-            string answer = game.Guess(guess);
+            string answerWithMessage = game.Guess(guess);
             //then
-            Assert.Equal("1A2B", answer.Split(" ")[0]);
+            Assert.Equal("1A2B", answerWithMessage.Split(" ")[0]);
         }
 
         [Theory]
