@@ -34,7 +34,7 @@ namespace BullsAndCowsTest
         [Theory]
         [InlineData("1 2 3 4", "1234")]
         [InlineData("5 6 7 8", "5678")]
-        public void Should_Return_4A0B_When_All_Digit_And_Position_Right(string guess, string secret)
+        public void Should_Return_Win_Message_When_All_Digit_And_Position_Right(string guess, string secret)
         {
             //given
             var mockSecretGenerator = new Mock<SecretGenerator>();
@@ -46,6 +46,23 @@ namespace BullsAndCowsTest
 
             //then
             Assert.Equal("Good job, you win", answer);
+        }
+
+        [Theory]
+        [InlineData("0 1 2 5", "1234")]
+        [InlineData("4 8 3 6", "5678")]
+        public void Should_Return_0A2B_When_2_Digit_Right_And_2_Position_Wrong(string guess, string secret)
+        {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            //when
+            string answer = game.Guess(guess);
+
+            //then
+            Assert.Equal("0A2B", answer);
         }
 
         [Theory]
