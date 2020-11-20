@@ -58,7 +58,8 @@ namespace BullsAndCows
 
         private bool IsValidInput(string input)
         {
-            if (input.Length != 7)
+            var validInputLength = 7;
+            if (input.Length != validInputLength)
             {
                 return false;
             }
@@ -70,7 +71,8 @@ namespace BullsAndCows
             }
 
             var inputWithoutSpace = input.Replace(" ", string.Empty);
-            for (int i = 0; i < 4; i++)
+            var validNumberLength = 4;
+            for (int i = 0; i < validNumberLength; i++)
             {
                 if (inputWithoutSpace.Where(guessChar => guessChar == inputWithoutSpace[i]).ToList().Count > 1)
                 {
