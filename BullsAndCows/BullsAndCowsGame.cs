@@ -11,6 +11,7 @@ namespace BullsAndCows
         private readonly SecretGenerator secretGenerator;
         private readonly string secret;
         private int chanceLeft = 6;
+        private int maxChance = 6;
 
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
@@ -20,6 +21,7 @@ namespace BullsAndCows
         }
 
         public bool CanContinue { get; private set; }
+
         public string CorrectAnswer
         {
             get
@@ -30,7 +32,6 @@ namespace BullsAndCows
 
         public string Guess(string guess)
         {
-            DeductOneChance();
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
             return this.Compare(this.secret, guessWithoutSpace);
         }
@@ -47,6 +48,14 @@ namespace BullsAndCows
             return false;
         }
 
+        public void CheckCorrectAnswer(string answer)
+        {
+            if (answer == CorrectAnswer)
+            {
+                CanContinue = false;
+            }
+        }
+
         private void DeductOneChance()
         {
             if (chanceLeft == 1)
@@ -61,6 +70,7 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
+            DeductOneChance();
             var xList = secret.Where((secret, index) => guess[index] == secret).ToList();
             var yList = secret.Where(secret => guess.Contains(secret)).ToList();
             var xOverlapY = xList.Where(x => yList.Contains(x)).Count();

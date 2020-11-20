@@ -11,7 +11,6 @@ namespace BullsAndCows
             SecretGenerator secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             var console = new ConsoleInteraction();
-            var correctAnswer = "4A0B";
 
             while (game.CanContinue)
             {
@@ -24,11 +23,7 @@ namespace BullsAndCows
 
                 var answer = game.Guess(guess);
                 console.PrintAnswer(answer);
-
-                if (answer == correctAnswer)
-                {
-                    break;
-                }
+                game.CheckCorrectAnswer(answer);
             }
 
             console.PrintExitMessage();

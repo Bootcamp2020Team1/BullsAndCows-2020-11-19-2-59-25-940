@@ -19,7 +19,6 @@ namespace BullsAndCowsTest
         {
             var secretGenerator = new FakeGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
-            Assert.NotNull(game);
             Assert.True(game.CanContinue);
         }
 
