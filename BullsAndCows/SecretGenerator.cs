@@ -8,9 +8,11 @@ namespace BullsAndCows
         {
             Random ran = new Random();
             string secret = ran.Next(0, 10).ToString();
-            ConstructNumber();
-            ConstructNumber();
-            ConstructNumber();
+            int secretLength = 4;
+            for (int i = 1; i < secretLength; i++)
+            {
+                ConstructNumber();
+            }
 
             void ConstructNumber()
             {
