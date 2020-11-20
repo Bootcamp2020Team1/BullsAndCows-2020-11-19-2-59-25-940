@@ -10,7 +10,7 @@ namespace BullsAndCowsTest
         [Fact]
         public void Should_create_BullsAndCowsGame()
         {
-            var secretGenerator = new TestSecretGenerator();
+            var secretGenerator = new SecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             Assert.NotNull(game);
             Assert.True(game.CanContinue);
@@ -20,8 +20,9 @@ namespace BullsAndCowsTest
         public void Should_Return_0A0B_When_All_Digit_And_Position_Wrong()
         {
             //given
-            var secretGenerator = new TestSecretGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns("1234");
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
             string answer = game.Guess("5 6 7 8");
@@ -44,7 +45,7 @@ namespace BullsAndCowsTest
             string answer = game.Guess(guess);
 
             //then
-            Assert.Equal("4A0B", answer);
+            Assert.Equal("Good job, you win", answer);
         }
 
         [Theory]
@@ -81,26 +82,36 @@ namespace BullsAndCowsTest
             Assert.Equal("1A2B", answer);
         }
 
+        [Theory]
+        [InlineData("1 4 2 3", "1234")]
+        [InlineData("1 3 4 2", "1234")]
+        public void Should_Return_1A3B_When_1_Digit_Right_And_2_Position_Wrong(string guess, string secret)
+        {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            //when
+            string answer = game.Guess(guess);
+
+            //then
+            Assert.Equal("1A3B", answer);
+        }
+
         [Fact]
         public void Should_Return_Error_Message_When_Invalid_Input()
         {
             //given
-            var secretGenerator = new TestSecretGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns("1234");
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
             string answer = game.Guess("5 6 7 7");
 
             //then
             Assert.Equal("Wrong Input, input again", answer);
-        }
-    }
-
-    public class TestSecretGenerator : SecretGenerator
-    {
-        public override string GenerateSecret()
-        {
-            return "1234";
         }
     }
 }

@@ -4,7 +4,7 @@ namespace BullsAndCows
 {
     public class SecretGenerator
     {
-        public string GenerateSecret()
+        public virtual string GenerateSecret()
         {
             Random ran = new Random();
             string secret = ran.Next(0, 10).ToString();
