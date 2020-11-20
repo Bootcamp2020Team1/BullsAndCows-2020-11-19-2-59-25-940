@@ -16,7 +16,7 @@ namespace BullsAndCows
             PlayCount = 0;
         }
 
-        public bool CanContinue { get; set; }
+        public bool CanContinue { get; private set; }
         private string ErrorMessage => "Wrong Input, input again";
         private int PlayCount { get; set; }
         private int EndPlayCount => 4;
