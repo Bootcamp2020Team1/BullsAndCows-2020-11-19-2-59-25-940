@@ -71,11 +71,11 @@ namespace BullsAndCows
         private string Compare(string secret, string guess)
         {
             DeductOneChance();
-            var xList = secret.Where((secret, index) => guess[index] == secret).ToList();
-            var yList = secret.Where(secret => guess.Contains(secret)).ToList();
-            var xOverlapY = xList.Where(x => yList.Contains(x)).Count();
+            var bullsList = secret.Where((secret, index) => guess[index] == secret).ToList();
+            var cowsList = secret.Where(secret => guess.Contains(secret)).ToList();
+            var theOverlapOfBullsAndCows = bullsList.Where(x => cowsList.Contains(x)).Count();
 
-            return $"{xList.Count()}A{yList.Count() - xOverlapY}B";
+            return $"{bullsList.Count()}A{cowsList.Count() - theOverlapOfBullsAndCows}B";
         }
     }
 }
