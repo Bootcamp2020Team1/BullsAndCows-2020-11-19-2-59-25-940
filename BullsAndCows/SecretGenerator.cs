@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BullsAndCows
 {
@@ -6,7 +7,18 @@ namespace BullsAndCows
     {
         public virtual string GenerateSecret()
         {
-            throw new NotImplementedException();
+            var secret = string.Empty;
+            while (secret.Length < 4)
+            {
+                var previous = new Random().Next(0, 9);
+                var random = new Random().Next(0, previous);
+                if (!secret.Contains(random.ToString()))
+                {
+                    secret += random;
+                }
+            }
+
+            return secret;
         }
     }
 }
