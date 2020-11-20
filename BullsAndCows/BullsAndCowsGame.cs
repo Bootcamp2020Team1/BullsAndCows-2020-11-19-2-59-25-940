@@ -18,6 +18,7 @@ namespace BullsAndCows
         public bool CanContinue { get; set; }
         private string ErrorMessage => "Wrong Input, input again";
         private int PlayCount { get; set; }
+        private int EndPlayCount => 4;
 
         public string Guess(string guess)
         {
@@ -47,7 +48,7 @@ namespace BullsAndCows
 
             PlayCount++;
 
-            if (PlayCount == 6)
+            if (PlayCount == EndPlayCount)
             {
                 CanContinue = false;
             }
