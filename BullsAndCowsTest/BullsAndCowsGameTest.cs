@@ -116,16 +116,18 @@ namespace BullsAndCowsTest
             Assert.Equal("1A3B", answer);
         }
 
-        [Fact]
-        public void Should_Return_Error_Message_When_Invalid_Input()
+        [Theory]
+        [InlineData("1 4 23", "1234")]
+        [InlineData("1 3 4 4", "1234")]
+        public void Should_Return_Error_Message_When_Invalid_Input(string guess, string secret)
         {
             //given
             var mockSecretGenerator = new Mock<SecretGenerator>();
-            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns("1234");
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
-            string answer = game.Guess("5 6 7 7");
+            string answer = game.Guess(guess);
 
             //then
             Assert.Equal("Wrong Input, input again", answer);
