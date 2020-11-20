@@ -119,6 +119,8 @@ namespace BullsAndCowsTest
         [Theory]
         [InlineData("1 4 23", "1234")]
         [InlineData("1 3 4 4", "1234")]
+        [InlineData("1 3 42 ", "1234")]
+        [InlineData("s 3 2 4", "1234")]
         public void Should_Return_Error_Message_When_Invalid_Input(string guess, string secret)
         {
             //given

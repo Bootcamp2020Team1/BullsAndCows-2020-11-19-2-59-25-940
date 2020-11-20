@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
@@ -59,6 +60,12 @@ namespace BullsAndCows
 
         private bool IsValidInput(string input)
         {
+            var regex = new Regex(@"^([0-9]\s){3}[0-9]$");
+            if (!regex.Match(input).Success)
+            {
+                return false;
+            }
+
             var validInputLength = 7;
             if (input.Length != validInputLength)
             {
@@ -66,7 +73,8 @@ namespace BullsAndCows
             }
 
             char space = ' ';
-            if (input.ToCharArray()[1] != space || input.ToCharArray()[3] != space || input.ToCharArray()[5] != space)
+            if (input.ToCharArray()[1] != space || input.ToCharArray()[3] != space ||
+                input.ToCharArray()[5] != space)
             {
                 return false;
             }
