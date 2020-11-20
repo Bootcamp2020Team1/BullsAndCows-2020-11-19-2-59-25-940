@@ -6,8 +6,8 @@ namespace BullsAndCows
     {
         public virtual string GenerateSecret()
         {
-            Random ran = new Random();
-            string secret = ran.Next(0, 10).ToString();
+            Random seed = new Random();
+            string secret = seed.Next(0, 10).ToString();
             int secretLength = 4;
             for (int i = 1; i < secretLength; i++)
             {
@@ -16,10 +16,10 @@ namespace BullsAndCows
 
             void ConstructNumber()
             {
-                string nextNumber = ran.Next(0, 10).ToString();
+                string nextNumber = seed.Next(0, 10).ToString();
                 while (secret.Contains(nextNumber))
                 {
-                    nextNumber = ran.Next(0, 10).ToString();
+                    nextNumber = seed.Next(0, 10).ToString();
                 }
 
                 secret += nextNumber;

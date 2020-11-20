@@ -26,5 +26,19 @@ namespace BullsAndCowsTest
             //then
             Assert.Equal(secret.Length, secretLength);
         }
+
+        [Fact]
+        public void Should_different_Between_2_Digits()
+        {
+            //given
+            var secretGenerator = new SecretGenerator();
+            var secret = secretGenerator.GenerateSecret();
+
+            //when
+            var secret1 = secretGenerator.GenerateSecret();
+
+            //then
+            Assert.NotEqual(secret, secret1);
+        }
     }
 }
